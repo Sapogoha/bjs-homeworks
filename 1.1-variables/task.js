@@ -5,7 +5,7 @@ function averageMark(a, g, p) {
 
   let averageMark = (algebra + geography + physics) / 3;
 
-  return averageMark.toFixed(2);
+  return averageMark;
 }
 
 function sayHello(userName) {
