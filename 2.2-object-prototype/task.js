@@ -3,14 +3,10 @@
 //Task 1
 
 String.prototype.isPalindrome = function () {
-  const string = this.toLocaleLowerCase().replace(/\s+/g, '');
-  const reverseString = this.toLocaleLowerCase()
-    .split('')
-    .reverse()
-    .join('')
-    .replace(/\s+/g, '');
+  const string = this.toLowerCase().replace(/\s+/g, '');
+  const reversedString = string.split('').reverse().join('');
 
-  return string === reverseString;
+  return string === reversedString;
 };
 
 console.log('А роза упала на лапу Азора'.isPalindrome());
@@ -38,8 +34,8 @@ function getAverageMark(marks) {
 
 function checkBirthday(birthday) {
   const now = Date.now();
-  birthday = +new Date(birthday).getTime();
-  const diff = now - birthday;
+  const parsedBirthday = new Date(birthday).getTime();
+  const diff = now - parsedBirthday;
   const age = diff / (1000 * 60 * 60 * 24 * 365.25);
 
   return age >= 18;
