@@ -9,39 +9,36 @@ function sleep(milliseconds) {
 
 function sum(...args) {
   // Замедление на половину секунды.
-  sleep(100); // Можно использовать другое значение замедления.
+  sleep(10); // Можно использовать другое значение замедления.
   return args.reduce((sum, arg) => {
     return (sum += +arg);
   }, 0);
 }
 
 function compareArrays(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-  return arr1.every((item, i) => item === arr2[i]);
+  return (
+    arr1.length === arr2.length && arr1.every((item, i) => item === arr2[i])
+  );
 }
 
 function memorize(fn, limit) {
   const memory = [];
 
-  return function (...args) {
+  return (...args) => {
     const searchResult = memory.find((item) => compareArrays(item.args, args));
 
     if (searchResult) {
-      console.log('Результат из памяти');
       return searchResult.result;
-    } else {
-      memory.push({ args: args, result: fn(...args) });
     }
 
+    const result = fn(...args);
+    memory.push({ args: args, result: result });
+
     if (memory.length > limit) {
-      console.log('Удаляю лишнее');
       memory.shift();
     }
 
-    console.log('Считаю');
-    return fn(...args);
+    return result;
   };
 }
 
@@ -56,7 +53,7 @@ const testArray = [
 function testCase(testFunction, someTimer) {
   console.time('timer');
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 10; i++) {
     testArray.forEach((element) => testFunction(...element));
   }
   console.timeEnd(someTimer);
